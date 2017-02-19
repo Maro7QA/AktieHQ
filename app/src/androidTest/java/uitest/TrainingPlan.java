@@ -435,7 +435,7 @@ public class TrainingPlan extends InstrumentationTestCase {
 
 // click on ActivityType button com.adidas.micoach.beta:id/action_share_goal
 
-    public void startSharing() throws UiObjectNotFoundException {
+    private void startSharing() throws UiObjectNotFoundException {
         uiDevice.wait(Until.hasObject(By.clazz(TextView.class).text("not_existing_object")), 5000);
 
         UiObject goal_sharing = uiDevice.findObject(new UiSelector().resourceId("com.adidas.micoach.testing:id/action_share_goal"));
@@ -465,7 +465,7 @@ public class TrainingPlan extends InstrumentationTestCase {
 
 //Select Mail account. Test phone has a GMAIL digital sports test account
 
-    public void selectGmail() throws UiObjectNotFoundException{
+    private void selectGmail() throws UiObjectNotFoundException{
 
         uiDevice.swipe((3 * uiDevice.getDisplayWidth())/4, 2 * uiDevice.getDisplayHeight() / 3, (3 * uiDevice.getDisplayWidth())/4, uiDevice.getDisplayHeight() / 10, 40);
 
@@ -480,7 +480,7 @@ public class TrainingPlan extends InstrumentationTestCase {
     }
 
     //Set mail address to Martin Hoffmeister and send it out
-    public void sendMail() throws UiObjectNotFoundException {
+    private void sendMail() throws UiObjectNotFoundException {
         UiObject to = uiDevice.findObject(new UiSelector().resourceId("com.google.android.gm:id/to"));
         to.setText(TO);
         uiDevice.waitForIdle(1000);

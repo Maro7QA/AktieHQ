@@ -88,13 +88,9 @@ public class WeekDays extends InstrumentationTestCase {
         StartAppTxtFr();
        // selectShare();
 
-
-       // UiObject mailText = uiDevice.findObject(new UiSelector().resourceId("com.adidas.micoach:id/share_workouts_image_title"));
-
         UiObject mailText = uiDevice.findObject(new UiSelector().resourceId("com.ktix007.talk:id/etMain"));
 
-        // mailText.setText(text);
-        final int veryLowTemp = 5;
+        final int veryLowTemp = -5;
 
         final String[] weekday = new String [] {"MON","TUE","WED","THU","FRI","SAT","SUN"};
         final String[] actWeekday = new String [] {"Saturday","Sunday","Monday","Tuesday","Wednesday","Thursday","Friday"};
@@ -109,38 +105,38 @@ public class WeekDays extends InstrumentationTestCase {
 
         if ( temp[0] < veryLowTemp ) {
             int water = (int) (1.0 * amountOfWater * (min / 30));
+            mailText.setText("Hello, today is " +  actWeekday[i]+ " and the temperature in " + location + " is "  + textTemp + " Way too cold. You shouldn't go for a run!");
+            uiDevice.wait(Until.hasObject(By.res("delay")), 1000);
+        }
+
+
+
+        if (temp[0] >= veryLowTemp && temp[0] < (veryLowTemp+10) ) {
+            int water = (int) (1.0 * amountOfWater * (min / 30));
             mailText.setText("Hello, today is " +  actWeekday[i]+ " and the temperature in " + location + " is "  + textTemp + " You need to drink " + water + " ml of water for a " + min + " minute run!");
             uiDevice.wait(Until.hasObject(By.res("delay")), 1000);
         }
 
-        
-/**
-        if (temp[0] < (veryLowTemp + 10)) {
-            int water = (int) (1.0 * amountOfWater * (min / 30));
-            mailText.setText("Hello, the temperature in " + location + " is " +  textTemp + " today and you need to drink " + water +" ml of water for a " + min + " minute run!");
-            uiDevice.wait(Until.hasObject(By.res("delay")), 1000);
-        }
-
-        if ( temp[0] < (veryLowTemp + 10)) {
+        if ( temp[0] >= (veryLowTemp+10) && temp[0] < (veryLowTemp+20) ){
             int water = (int) (1.5 * amountOfWater * (min / 30));
-            mailText.setText("Hello, the temperature in " + location + " is " +  textTemp + " today and you need to drink " + water +" ml of water for a " + min + " minute run!");
+            mailText.setText("Hello, today is " +  actWeekday[i]+ " and the temperature in " + location + " is "  + textTemp + " You need to drink " + water + " ml of water for a " + min + " minute run!");
             uiDevice.wait(Until.hasObject(By.res("delay")), 1000);
         }
 
-        if ( temp[0] < (veryLowTemp + 10)) {
+        if ( temp[0] >= (veryLowTemp+20) && temp[0] < (veryLowTemp+35)) {
             int water = (int) (2.0 * amountOfWater * (min / 30));
-            mailText.setText( "Hello, the temperature in " + day + location + " is " +  textTemp + " today and you need to drink " + water +" ml of water for a " + min + " minute run!");
+            mailText.setText("Hello, today is " +  actWeekday[i]+ " and the temperature in " + location + " is "  + textTemp + " You need to drink " + water + " ml of water for a " + min + " minute run!");
             uiDevice.wait(Until.hasObject(By.res("delay")), 1000);
         }
 
-        if ( temp[0] < (veryLowTemp + 25)) {
+        if ( temp[0] > (veryLowTemp + 35)) {
             int water = (int) (2.5 * amountOfWater * (min / 30));
-            mailText.setText("Hello, the temperature in" + location + " is " +  textTemp + " today and you need to drink " + water +" ml of water for a " + min + " minute run! But be careful, it's very dangerous to run in extrem heat!");
+            mailText.setText("Hello, today is " +  actWeekday[i]+ " and the temperature in " + location + " is "  + textTemp + " You need to drink " + water + " ml of water for a " + min + " minute run! But please be careful, when you go for a run at these kind of temperature!");
             uiDevice.wait(Until.hasObject(By.res("delay")), 1000);
         }
 
 
-*/
+
 
 
         /** Train and Run if you want to send it out via mail
@@ -240,7 +236,7 @@ public class WeekDays extends InstrumentationTestCase {
 
 
         if (Train.exists()) {
-            uiDevice.swipe(1* uiDevice.getDisplayWidth()/ 12, uiDevice.getDisplayHeight() / 3, 11 * uiDevice.getDisplayWidth()/ 12, uiDevice.getDisplayHeight() / 3, 40);
+            uiDevice.swipe(uiDevice.getDisplayWidth() / 12, uiDevice.getDisplayHeight() / 3, 11 * uiDevice.getDisplayWidth()/ 12, uiDevice.getDisplayHeight() / 3, 40);
         }
 
         uiDevice.wait(Until.hasObject(By.res("Unkown")), 2000);
@@ -286,22 +282,16 @@ public class WeekDays extends InstrumentationTestCase {
 
         final String text;
 
-        text = maxTemp.getText();
-
         uiDevice.wait(Until.hasObject(By.res("Unkown")), 1000);
 
         UiObject locationText = uiDevice.findObject(new UiSelector().resourceId("android:id/text1"));
 
         final String location;
 
-        location = locationText.getText();
-
-
-
 
     }
 
-    public String returnText(String myinput) throws UiObjectNotFoundException {
+    private String returnText(String myinput) throws UiObjectNotFoundException {
 
         uiDevice.wait(Until.hasObject(By.res("Delay")), 1000);
 
@@ -392,7 +382,7 @@ public class WeekDays extends InstrumentationTestCase {
 
     // click on ActivityType button com.adidas.micoach.beta:id/action_share_goal
 
-    public void startSharing() throws UiObjectNotFoundException {
+    private void startSharing() throws UiObjectNotFoundException {
 
         // select predefined GMail icon
 
@@ -436,7 +426,7 @@ public class WeekDays extends InstrumentationTestCase {
 
     }
 
-    public void sendMail() throws UiObjectNotFoundException {
+    private void sendMail() throws UiObjectNotFoundException {
 
         // select receiver
 
